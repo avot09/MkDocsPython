@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ config.site_description }}">
+    <meta name="author" content="{{ config.site_author }}">
+    <meta name="keywords" content="документация, mkdocs, {{ config.site_name }}">
+    
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+    
+    <link rel="stylesheet" href="{{ base_url }}/assets/css/custom.min.css">
+    
+    <link rel="icon" type="image/x-icon" href="{{ base_url }}/assets/img/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo-section">
+                <a href="{{ base_url }}/" class="logo-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="site-name">{{ config.site_name }}</span>
+                        <span class="site-tagline">Документация</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    {% for nav_item in nav %}
+                    <li class="nav-item">
+                        <a href="{{ nav_item.url|url }}" class="nav-link {% if nav_item.active %}active{% endif %}">
+                            {{ nav_item.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://github.com/avot09/MkDocsPython" class="github-button" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span class="button-text">GitHub</span>
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span>Навигация</span>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть меню">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <ul class="mobile-nav-list">
+                {% for nav_item in nav %}
+                <li class="mobile-nav-item">
+                    <a href="{{ nav_item.url|url }}" class="mobile-nav-link {% if nav_item.active %}active{% endif %}">
+                        {{ nav_item.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+    <main class="main-content">
+        <div class="container content-container">
+            {% block content %}
+                {{ page.content }}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-columns">
+                <div class="footer-col footer-about">
+                    <h3 class="footer-title">{{ config.site_name }}</h3>
+                    <p class="footer-description">{{ config.site_description }}</p>
+                    <div class="social-links">
+                        <a href="https://github.com/avot09" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/" class="social-link" target="_blank" rel="noopener" aria-label="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="mailto:your-email@example.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col footer-links">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-nav">
+                        {% for nav_item in nav %}
+                        <li class="footer-nav-item">
+                            <a href="{{ nav_item.url|url }}" class="footer-nav-link">
+                                {{ nav_item.title }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-tech">
+                    <h3 class="footer-title">Технологии</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">MkDocs</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">PostCSS</span>
+                        <span class="tech-badge">GitHub Pages</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; {{ config.site_author }}, {{ build_date_utc.strftime('%Y') }}. Все права защищены.
+                </div>
+                <div class="footer-built">
+                    Собрано с помощью <a href="https://www.mkdocs.org/" target="_blank" rel="noopener">MkDocs</a>.
+                    Хостится на <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Вернуться наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const scrollToTop = document.getElementById('scrollToTop');
+           
+            if (mobileMenuToggle && mobileMenu && mobileMenuClose) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+                
+                const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+            
+            if (scrollToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        scrollToTop.classList.add('visible');
+                    } else {
+                        scrollToTop.classList.remove('visible');
+                    }
+                });
+                
+                scrollToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

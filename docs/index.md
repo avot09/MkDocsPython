@@ -2,18 +2,7 @@
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
-## Commands
+Этот сайт сделан в рамках дисциплины "Проектирование и развертывание веб-решений в эко-системе Python." Здесь же по ссылкам можно перейти на отчёт о проделанной работе в рамках разработки данной страницы.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
 
-## Project layout
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-
-Чтобы посмотреть отчёт, передите на следующую страницу: [report](/report)

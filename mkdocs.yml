@@ -1,4 +1,16 @@
-site_name: Mkdocs
-site_url: https://avot09.github.io/MkDocsPython/
+site_name: Мой сайт
 site_author: Виктория Андриянова
-site_description: Генерация документации с MkDocs
+site_description: Минимальная кастомная тема
+
+theme:
+  name: mkdocs
+  custom_dir: overrides/
+
+nav:
+  - Главная: index.md
+  - Отчёт по 1 лабораторной: report_1.md
+  - Отчёт по 2 лабораторной: report_2.md
+
+
+extra_css:
+  - assets/css/custom.min.css

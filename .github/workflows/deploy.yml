@@ -1,9 +1,5 @@
-name: Deploy MkDocs Site
-
-on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
+name: Deploy Minified Site
+on: [push]
 
 permissions:
   contents: write
@@ -15,31 +11,33 @@ environment:
   url: ${{ steps.deployment.outputs.page_url }}
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment: github-pages
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5 
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+      - run: pip install mkdocs minify-html
 
-      - name: Install MkDocs
-        run: pip install mkdocs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
 
-      - name: Build MkDocs
-        run: mkdocs build
+      - run: npm run build:css
 
+      - run: mkdocs build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - run: python scripts/minify.py
+
+      - name: Validate HTML
+        run: |
+          pip install html5validator
+          html5validator --root site/ --ignore "JAVA_TOOL_OPTIONS"
+
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: ./site
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
