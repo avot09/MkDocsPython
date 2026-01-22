@@ -3,48 +3,75 @@ name: Deploy MkDocs with PostCSS
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:
+    paths: 
+      - ".github/workflows/**"
+      - "docs/**"
+      - "overrides/**"
+      - "custom.css"
+      - "mkdocs.yml"
+      - "package.json"
+      - "postcss.config.js"
+      - "scripts/**"
+  workflow_dispatch: 
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-environment:
-  name: github-pages
-  url: ${{ steps.deployment.outputs.page_url }}
+  contents: read  
+  pages: write     
+  id-token: write  
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: github-pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python and MkDocs
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-        run: pip install mkdocs
 
-      - name: Try to build CSS with PostCSS
-        continue-on-error: true  
+      - name: Install Python dependencies
         run: |
-          echo "Пытаемся установить Node.js и PostCSS..."
-          apt-get update && apt-get install -y nodejs npm || true
-          npm ci 2>/dev/null || echo "npm ci не сработал, пропускаем"
-          npm run build:css 2>/dev/null || echo "PostCSS сборка не сработала, используем исходный CSS"
+          pip install mkdocs
+          pip install minify-html
+          pip install html5validator
 
-      - name: Build MkDocs site
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm' 
+          
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Build CSS with PostCSS
+        run: npm run build:css
+
+      - name: Build MkDocs
         run: mkdocs build
 
-      - name: Try HTML validation
-        continue-on-error: true
+      - name: Minify HTML
         run: |
-          pip install html5validator 2>/dev/null || echo "Не удалось установить валидатор"
-          html5validator --root site/ --ignore "JAVA_TOOL_OPTIONS" 2>/dev/null || echo "Валидация пропущена"
+          python -c "
+          import os, minify_html
+          for root, dirs, files in os.walk('site'):
+            for file in files:
+              if file.endswith('.html'):
+                path = os.path.join(root, file)
+                with open(path, 'r', encoding='utf-8') as f:
+                  content = f.read()
+                with open(path, 'w', encoding='utf-8') as f:
+                  f.write(minify_html.minify(content))
+          "
+
+      - name: Validate HTML
+        run: html5validator --root site/ --ignore "JAVA_TOOL_OPTIONS"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -52,5 +79,5 @@ jobs:
           path: ./site
 
       - name: Deploy to GitHub Pages
-        id: deployment
+        id: deployment 
         uses: actions/deploy-pages@v4

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Минимальная кастомная тема">
+    <meta name="author" content="Виктория Андриянова">
+    <meta name="keywords" content="документация, mkdocs, Мой сайт">
+    
+    <title>Отчёт по 2 лабораторной - Мой сайт</title>
+    
+    <link rel="stylesheet" href="../assets/css/custom.min.css">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo-section">
+                <a href="../" class="logo-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="site-name">Мой сайт</span>
+                        <span class="site-tagline">Документация</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    
+                    <li class="nav-item">
+                        <a href=".." class="nav-link ">
+                            Главная
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="../report_1/" class="nav-link ">
+                            Отчёт по 1 лабораторной
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="./" class="nav-link active">
+                            Отчёт по 2 лабораторной
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://github.com/avot09/MkDocsPython" class="github-button" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span class="button-text">GitHub</span>
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span>Навигация</span>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть меню">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <ul class="mobile-nav-list">
+                
+                <li class="mobile-nav-item">
+                    <a href=".." class="mobile-nav-link ">
+                        Главная
+                    </a>
+                </li>
+                
+                <li class="mobile-nav-item">
+                    <a href="../report_1/" class="mobile-nav-link ">
+                        Отчёт по 1 лабораторной
+                    </a>
+                </li>
+                
+                <li class="mobile-nav-item">
+                    <a href="./" class="mobile-nav-link active">
+                        Отчёт по 2 лабораторной
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    <main class="main-content">
+        <div class="container content-container">
+            
+                <h1 id="html-css-js">Отчёт о лабораторной работе «Кастомизация статического сайта (шаблонизация, сборка статики: HTML, CSS, JS)»</h1>
+<p><strong>Предмет</strong>: <em>Проектирование и развертывание веб-решений в эко-системе Python</em></p>
+<p><strong>Студент</strong>: <em>Андриянова Виктория Алексеевна</em></p>
+<h2 id="1">1. Что было сделано</h2>
+<h3 id="11">1.1 Создана собственная тема</h3>
+<ul>
+<li><strong>Шаблон</strong>: Создан файл <code>overrides/main.html</code> на Jinja2 с кастомными <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;footer&gt;</code>.</li>
+<li><strong>Стили</strong>: Написан CSS в <code>src/custom.css</code> с переменными для цветов и шрифтов.</li>
+<li><strong>Метаданные</strong>: В шаблон добавлены теги <code>&lt;meta&gt;</code> (описание, автор, ключевые слова).</li>
+</ul>
+<h3 id="12-cicd">1.2 Настроен пайплайн сборки (CI/CD)</h3>
+<p>Создан файл <code>.github/workflows/deploy.yml</code>. При каждом пуше в <code>main</code> он:
+1.  <strong>Собирает CSS</strong> через PostCSS (автопрефиксы + минификация).
+2.  <strong>Генерирует сайт</strong> командой <code>mkdocs build</code>.
+3.  <strong>Минифицирует HTML</strong> скриптом <code>scripts/minify.py</code>.
+4.  <strong>Проверяет HTML</strong> на валидность утилитой <code>html5validator</code>.
+5.  <strong>Публикует сайт</strong> на GitHub Pages.</p>
+<h3 id="13">1.3 Внедрены современные инструменты</h3>
+<ul>
+<li><strong>PostCSS</strong>: Обработка стилей (<code>autoprefixer</code>, <code>cssnano</code>).</li>
+<li><strong>Автоматизация</strong>: Скрипт <code>npm run build:css</code> для сборки CSS.</li>
+<li><strong>Валидация</strong>: Обязательная проверка HTML перед деплоем.</li>
+</ul>
+<h2 id="2">2. Итог</h2>
+<ul>
+<li><strong>Сайт</strong>: Работает по адресу <a href="https://avot09.github.io/MkDocsPython/">https://avot09.github.io/MkDocsPython/</a></li>
+<li><strong>Код</strong>: Весь проект в репозитории <a href="https://github.com/avot09/MkDocsPython">https://github.com/avot09/MkDocsPython</a></li>
+<li><strong>Результат</strong>: Полностью автоматизированный процесс от кода до работающего сайта. Все обязательные требования задания выполнены.</li>
+</ul>
+            
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-columns">
+                <div class="footer-col footer-about">
+                    <h3 class="footer-title">Мой сайт</h3>
+                    <p class="footer-description">Минимальная кастомная тема</p>
+                    <div class="social-links">
+                        <a href="https://github.com/avot09" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/" class="social-link" target="_blank" rel="noopener" aria-label="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="mailto:your-email@example.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col footer-links">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-nav">
+                        
+                        <li class="footer-nav-item">
+                            <a href=".." class="footer-nav-link">
+                                Главная
+                            </a>
+                        </li>
+                        
+                        <li class="footer-nav-item">
+                            <a href="../report_1/" class="footer-nav-link">
+                                Отчёт по 1 лабораторной
+                            </a>
+                        </li>
+                        
+                        <li class="footer-nav-item">
+                            <a href="./" class="footer-nav-link">
+                                Отчёт по 2 лабораторной
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-tech">
+                    <h3 class="footer-title">Технологии</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">MkDocs</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">PostCSS</span>
+                        <span class="tech-badge">GitHub Pages</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; Виктория Андриянова, 2026. Все права защищены.
+                </div>
+                <div class="footer-built">
+                    Собрано с помощью <a href="https://www.mkdocs.org/" target="_blank" rel="noopener">MkDocs</a>.
+                    Хостится на <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Вернуться наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const scrollToTop = document.getElementById('scrollToTop');
+           
+            if (mobileMenuToggle && mobileMenu && mobileMenuClose) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+                
+                const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+            
+            if (scrollToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        scrollToTop.classList.add('visible');
+                    } else {
+                        scrollToTop.classList.remove('visible');
+                    }
+                });
+                
+                scrollToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

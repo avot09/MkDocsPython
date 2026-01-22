@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Минимальная кастомная тема">
+    <meta name="author" content="Виктория Андриянова">
+    <meta name="keywords" content="документация, mkdocs, Мой сайт">
+    
+    <title>Отчёт по 1 лабораторной - Мой сайт</title>
+    
+    <link rel="stylesheet" href="../assets/css/custom.min.css">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo-section">
+                <a href="../" class="logo-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="site-name">Мой сайт</span>
+                        <span class="site-tagline">Документация</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    
+                    <li class="nav-item">
+                        <a href=".." class="nav-link ">
+                            Главная
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="./" class="nav-link active">
+                            Отчёт по 1 лабораторной
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="../report_2/" class="nav-link ">
+                            Отчёт по 2 лабораторной
+                        </a>
+                    </li>
+                    
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://github.com/avot09/MkDocsPython" class="github-button" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <span class="button-text">GitHub</span>
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span>Навигация</span>
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть меню">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <ul class="mobile-nav-list">
+                
+                <li class="mobile-nav-item">
+                    <a href=".." class="mobile-nav-link ">
+                        Главная
+                    </a>
+                </li>
+                
+                <li class="mobile-nav-item">
+                    <a href="./" class="mobile-nav-link active">
+                        Отчёт по 1 лабораторной
+                    </a>
+                </li>
+                
+                <li class="mobile-nav-item">
+                    <a href="../report_2/" class="mobile-nav-link ">
+                        Отчёт по 2 лабораторной
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    <main class="main-content">
+        <div class="container content-container">
+            
+                <h1 id="_1">Отчёт о лабораторной работе «Создание и развертывание статического сайта»</h1>
+<p><strong>Предмет</strong>: <em>Проектирование и развертывание веб-решений в эко-системе Python</em></p>
+<p><strong>Студент</strong>: <em>Андриянова Виктория Алексеевна</em></p>
+<h2 id="1">1. Введение и цель работы</h2>
+<p>Целью данной работы было освоение процесса проектирования и автоматизированного развёртывания статического веб-сайта. В рамках задачи использовался генератор статических сайтов MkDocs на Python, система контроля версий Git, а также инструменты непрерывной интеграции и доставки (CI/CD) для публикации результата на хостинге GitHub Pages.</p>
+<h2 id="2">2. Ход работы</h2>
+<h3 id="21">2.1. Подготовка репозитория и локальной среды</h3>
+<p>Для начала работы был создан новый публичный репозиторий на GitHub под названием <code>MkDocsPython</code>. После создания репозиторий был клонирован на локальную машину для дальнейшей разработки.</p>
+<h3 id="22">2.2. Настройка рабочего окружения</h3>
+<p>Разработка велась в среде Windows. Для изоляции зависимостей проекта и корректной работы были выполнены следующие шаги в командной строке (терминале):</p>
+<pre><code class="language-bash"># Создание виртуального окружения Python в папке 'venv'
+python -m venv venv
+
+# Активация созданного виртуального окружения (для PowerShell)
+.\venv\Scripts\Activate.ps1
+
+# Установка основного инструмента — фреймворка MkDocs
+pip install mkdocs
+
+### Шаг 2. Создание и настройка окружения
+
+Работа выполнялась под операционной системой Windows. Были выполнены следующие команды:
+
+```sh
+# создание виртуального окружения
+python -m venv venv
+
+# активация виртуального окружения
+venv/Scripts/Activate.ps1
+
+# установка mkdocs
+pip install mkdocs
+
+### Шаг 3. Генерация сайта с помощью MkDocs
+
+Для работы с mkdocs использовались следующие команды:
+
+```sh
+# генерация проекта
+mkdocs new ./
+
+# запуск сервера со сгенерированным проектом
+mkdocs serve
+
+# генерация статических файлов из проекта
+mkdocs build
+</code></pre>
+<h3 id="4-github-pages">Шаг 4. Настройка автоматического развёртывания на GitHub Pages</h3>
+<p>В настройках GitHub в разделе <code>Pages</code> было активировано развёртывание с помощью GitHub Actions.
+Также был добавлен файл <code>deploy.yml</code> в директорию <code>.github/workflows</code>, внутри которого
+настроены шаги по установке python, зависимостей для mkdocks, генерацией артифакта и публикацией
+его на GitHub Pages</p>
+<h2 id="_2">Исследование по теме развёртывания</h2>
+<h3 id="1-cdn">1. Использование российских CDN для ускорения загрузки контента</h3>
+<p><strong>Сеть доставки контента (CDN)</strong> — это распределённая сеть серверов, предназначенная для повышения скорости и надёжности доставки веб-контента. Принцип работы CDN основан на геораспределении: файлы сайта (изображения, стили, скрипты) кэшируются на множестве серверов, расположенных в разных регионах, и запрашиваются пользователем с ближайшего из них. Это значительно снижает задержки и повышает доступность ресурса.</p>
+<p>Российский рынок предлагает ряд решений для эффективного использования CDN:</p>
+<ul>
+<li><strong><a href="https://yandex.cloud/ru/services/cdn">Yandex Cloud CDN</a></strong> — интеграция с облачной платформой Яндекса, защита от DDoS-атак.</li>
+<li><strong><a href="https://cloud.vk.com/docs/ru/networks/cdn">VK Cloud CDN</a></strong> (ранее — Mail.ru Cloud Solutions) — сервис в составе облачной инфраструктуры VK.</li>
+<li><strong><a href="https://selectel.ru/services/additional/cdn/">Selectel CDN</a></strong> — решение, ориентированное на надёжность и производительность.</li>
+<li><strong><a href="https://www.cdnvideo.ru/">CDNvideo</a></strong> и <strong><a href="https://ngenix.net/ecp/cdn/">NGENIX</a></strong> — специализированные платформы для обработки медиаконтента и высоких нагрузок.</li>
+</ul>
+<h3 id="2-cicd-gitverse">2. Реализация CI/CD на платформе GitVerse</h3>
+<p><strong>GitVerse</strong> — это российская платформа для совместной разработки, предоставляющая полный цикл инструментов для управления проектами, аналогичный GitLab. Её ключевое преимущество — встроенная система непрерывной интеграции и доставки (CI/CD).</p>
+<p>Принцип работы CI/CD в GitVerse основан на декларативном описании пайплайнов в YAML-файле (<code>.gitlab-ci.yml</code>). В этом файле разработчик задаёт последовательность этапов (например, сборка, тестирование, развёртывание). При каждом событии в репозитории (push, merge request) GitVerse автоматически запускает этот пайплайн, выполняя задания в изолированных средах (раннерах). Это позволяет полностью автоматизировать процесс от коммита кода до его публикации в продакшен, обеспечивая согласованность и контроль качества.</p>
+<h3 id="3">3. Варианты деплоя статического сайта в продакшен и необходимые инструменты</h3>
+<p>Развёртывание статического сайта может быть организовано различными способами, в зависимости от масштаба, бюджета и требований к инфраструктуре.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Вариант деплоя</th>
+<th style="text-align: left;">Описание</th>
+<th style="text-align: left;">Типичные инструменты</th>
+<th style="text-align: left;">Преимущества</th>
+<th style="text-align: left;">Сложность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Git-ориентированные платформы</strong></td>
+<td style="text-align: left;">Публикация сайта напрямую из репозитория.</td>
+<td style="text-align: left;">GitHub Pages, GitLab Pages, Netlify, Vercel.</td>
+<td style="text-align: left;">Максимальная простота, полная автоматизация, часто бесплатный старт.</td>
+<td style="text-align: left;">Низкая</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Объектное хранилище + CDN</strong></td>
+<td style="text-align: left;">Загрузка файлов в облачное хранилище с подключением CDN.</td>
+<td style="text-align: left;">Яндекс Object Storage, AWS S3, <code>s3cmd</code>, CLI облачных провайдеров.</td>
+<td style="text-align: left;">Высокая производительность, масштабируемость, надёжность.</td>
+<td style="text-align: left;">Средняя</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Виртуальный сервер (VPS)</strong></td>
+<td style="text-align: left;">Размещение файлов на выделенном сервере.</td>
+<td style="text-align: left;">Nginx/Apache, <code>rsync</code>/<code>scp</code>, Ansible для автоматизации.</td>
+<td style="text-align: left;">Полный контроль над окружением и конфигурацией.</td>
+<td style="text-align: left;">Высокая</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Контейнеризация</strong></td>
+<td style="text-align: left;">Упаковка сайта в Docker-контейнер.</td>
+<td style="text-align: left;">Docker, Dockerfile, Docker Hub, Kubernetes.</td>
+<td style="text-align: left;">Стандартизация, лёгкость переноса между средами.</td>
+<td style="text-align: left;">Высокая</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Наиболее простым</strong> для старта является использование встроенных возможностей Git-платформ (например, GitHub Pages с GitHub Actions). Для проектов, где критичны <strong>скорость и глобальная доступность</strong>, оптимальным выбором становится связка объектного хранилища и CDN. <strong>Полный контроль</strong> над инфраструктурой обеспечивает развёртывание на VPS, а <strong>контейнеризация</strong> актуальна для сложных сред, где статический сайт — часть более крупной микросервисной архитектуры.</p>
+            
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-columns">
+                <div class="footer-col footer-about">
+                    <h3 class="footer-title">Мой сайт</h3>
+                    <p class="footer-description">Минимальная кастомная тема</p>
+                    <div class="social-links">
+                        <a href="https://github.com/avot09" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/" class="social-link" target="_blank" rel="noopener" aria-label="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="mailto:your-email@example.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col footer-links">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-nav">
+                        
+                        <li class="footer-nav-item">
+                            <a href=".." class="footer-nav-link">
+                                Главная
+                            </a>
+                        </li>
+                        
+                        <li class="footer-nav-item">
+                            <a href="./" class="footer-nav-link">
+                                Отчёт по 1 лабораторной
+                            </a>
+                        </li>
+                        
+                        <li class="footer-nav-item">
+                            <a href="../report_2/" class="footer-nav-link">
+                                Отчёт по 2 лабораторной
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-tech">
+                    <h3 class="footer-title">Технологии</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">MkDocs</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">PostCSS</span>
+                        <span class="tech-badge">GitHub Pages</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; Виктория Андриянова, 2026. Все права защищены.
+                </div>
+                <div class="footer-built">
+                    Собрано с помощью <a href="https://www.mkdocs.org/" target="_blank" rel="noopener">MkDocs</a>.
+                    Хостится на <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Вернуться наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const scrollToTop = document.getElementById('scrollToTop');
+           
+            if (mobileMenuToggle && mobileMenu && mobileMenuClose) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+                
+                const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+            
+            if (scrollToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        scrollToTop.classList.add('visible');
+                    } else {
+                        scrollToTop.classList.remove('visible');
+                    }
+                });
+                
+                scrollToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
